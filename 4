@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            String input = getInput();
+            System.out.println("Введенная строка: " + input);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
+    public static String getInput() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите строку: ");
+        String input = scanner.nextLine();
+
+        if (input.isEmpty()) {
+            throw new Exception("Пустые строки недопустимы");
+        }
+
+        return input;
+    }
+}
+
+
+//В этом я использую класс Scanner для получения ввода от пользователя. Метод getInput() выбрасывает исключение типа Exception, 
+//когда пользователь вводит пустую строку с помощью throw new Exception("Пустые строки недопустимы").
+//В методе main(), вызываею getInput() и обрабатываю исключение Exception, выводя сообщение об ошибке с помощью e.getMessage().
+//Если пользователь вводит пустую строку, программа выбросит исключение и выведет сообщение "Ошибка: Пустые строки недопустимы".
