@@ -1,0 +1,35 @@
+//Вот пример реализации метода, который запрашивает у пользователя ввод дробного числа типа float и повторно запрашивает ввод, если был введен текст вместо числа:
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        float number = getFloatInput();
+        System.out.println("Введенное число: " + number);
+    }
+
+    public static float getFloatInput() {
+        Scanner scanner = new Scanner(System.in);
+        float number = 0;
+        boolean isValidInput = false;
+
+        while (!isValidInput) {
+            System.out.print("Введите дробное число: ");
+            String input = scanner.nextLine();
+
+            try {
+                number = Float.parseFloat(input);
+                isValidInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка! Введено некорректное значение.");
+            }
+        }
+
+        return number;
+    }
+}
+
+
+//В этом примере мы используем класс Scanner для получения ввода от пользователя. Метод getFloatInput() повторно запрашивает у пользователя ввод, пока не будет введено корректное дробное число.
+//Мы используем Float.parseFloat() для преобразования введенной строки в float. Если введен текст вместо числа, будет сгенерировано исключение NumberFormatException, и мы продолжим запрашивать ввод снова.
+//Когда будет введено корректное дробное число, метод вернет это число
