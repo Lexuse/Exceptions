@@ -1,0 +1,30 @@
+//Код который нужно исправить:
+try {
+   int d = 0;
+   double catchedRes1 = intArray[8] / d;
+   System.out.println("catchedRes1 = " + catchedRes1);
+} catch (ArithmeticException e) {
+   System.out.println("Catching exception: " + e);
+}
+
+
+//Исправление!
+Код, который предоставили, содержит деление на ноль, что приведет к арифметической ошибке. Чтобы избежать возникновения исключения, можно внести изменения в код следующим образом:
+
+try {
+    int d = 0;
+    double catchedRes1;
+    if (d != 0) {
+        catchedRes1 = intArray[8] / d;
+        System.out.println("catchedRes1 = " + catchedRes1);
+    } else {
+        System.out.println("Division by zero is not allowed.");
+    }
+} catch (ArithmeticException e) {
+    System.out.println("Catching exception: " + e);
+}
+
+
+//В этом коде мы добавили условие if (d != 0), чтобы проверить, что делитель d не равен нулю перед выполнением операции деления. 
+//Если d равно нулю, мы выводим сообщение "Division by zero is not allowed." и не выполняем операцию деления, чтобы избежать возникновения исключения ArithmeticException.
+//Таким образом, код будет продолжать выполняться без ошибок, если делитель не равен нулю, и будет ловить исключение ArithmeticException, если делитель равен нулю.
