@@ -1,0 +1,62 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите фамилию: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Введите имя: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Введите отчество: ");
+        String patronymic = scanner.nextLine();
+
+        System.out.print("Введите дату рождения (в формате dd.MM.yyyy): ");
+        String birthDateStr = scanner.nextLine();
+
+        System.out.print("Введите номер телефона: ");
+        String phoneNumberStr = scanner.nextLine();
+
+        System.out.print("Введите пол (f - женский, m - мужской): ");
+        String genderStr = scanner.nextLine();
+
+        LocalDate birthDate;
+        try {
+            birthDate = LocalDate.parse(birthDateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        } catch (Exception e) {
+            System.out.println("Ошибка! Неверный формат даты рождения.");
+            return;
+        }
+
+        long phoneNumber;
+        try {
+            phoneNumber = Long.parseLong(phoneNumberStr);
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка! Неверный формат номера телефона.");
+            return;
+        }
+
+        char gender;
+        if (genderStr.length() != 1 || (genderStr.charAt(0) != 'f' && genderStr.charAt(0) != 'm')) {
+            System.out.println("Ошибка! Неверный формат пола.");
+            return;
+        } else {
+            gender = genderStr.charAt(0);
+        }
+
+        String fileName = lastName + ".txt";
+        try (FileWriter fileWriter = new FileWriter(fileName, true)) {
+            String userData = lastName + " " + firstName + " " + patronymic + " " + birthDateStr + " " + phoneNumberStr + " " + genderStr + "\n";
+            fileWriter.write(userData);
+            System.out.println("Данные успешно записаны в файл " + fileName);
+        } catch (IOException e) {
+            System.out.println("Ошибка при записи данных в файл.");
+        }
+    }
+}
